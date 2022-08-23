@@ -12,6 +12,7 @@ import { IData, ITableData, IModalData } from "../models/models";
 import { GetData } from "../controller/table";
 import { format, parseISO } from "date-fns";
 import { EditCustomer } from "./editCustomer";
+import { getRowIdFromRowModel } from "@mui/x-data-grid/hooks/features/rows/gridRowsUtils";
 export function DisplayTable() {
   const [data, setData] = useState<ITableData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +21,6 @@ export function DisplayTable() {
 
   let content;
   let tableData: ITableData[] = [];
-  let modalData: IModalData[] = [];
   let propertyNames: string[] = [];
 
   GetData("https://demoeplanner.eliteit.dk/REST/api/Tasks", setData, setIsLoading);
@@ -74,11 +74,7 @@ export function DisplayTable() {
           <TableBody>
             {tableData.map((customer) => {
               return (
-                <TableRow
-                  onClick={() => {
-                    console.log("Clicked");
-                  }}
-                >
+                <TableRow onClick={() => {}}>
                   <TableCell>{customer.No}</TableCell>
                   <TableCell>{customer.Job_Description}</TableCell>
                   <TableCell>{customer.Job_Task_Description}</TableCell>
