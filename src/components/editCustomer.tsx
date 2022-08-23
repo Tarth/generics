@@ -28,13 +28,21 @@ export const EditCustomer: React.FC<DialogProps> = ({ open, selectedValue, onClo
             inputElement={<TextField></TextField>}
             editable={false}
           ></Row>
-          <Row title={"Opgavebeskrivelse"} inputElement={<TextField></TextField>}></Row>
-          <Row title={"Arbejdsbeskrivelse"} inputElement={<TextField></TextField>}></Row>
-          <Row title={"Status"} inputElement={<TextField></TextField>}></Row>
-          <Row title={"Prioritet"} inputElement={<TextField></TextField>}></Row>
-          <Row title={"Ansvarlig"} inputElement={<TextField></TextField>}></Row>
-          <Row title={"Udføres af"} inputElement={<TextField></TextField>}></Row>
-          <Row title={"Deadline"} inputElement={<TextField></TextField>}></Row>
+          <Row
+            title={"Opgavebeskrivelse"}
+            inputElement={<TextField></TextField>}
+            editable={true}
+          ></Row>
+          <Row
+            title={"Arbejdsbeskrivelse"}
+            inputElement={<TextField></TextField>}
+            editable={true}
+          ></Row>
+          <Row title={"Status"} inputElement={<TextField></TextField>} editable={true}></Row>
+          <Row title={"Prioritet"} inputElement={<TextField></TextField>} editable={true}></Row>
+          <Row title={"Ansvarlig"} inputElement={<TextField></TextField>} editable={true}></Row>
+          <Row title={"Udføres af"} inputElement={<TextField></TextField>} editable={true}></Row>
+          <Row title={"Deadline"} inputElement={<TextField></TextField>} editable={true}></Row>
         </Stack>
       </Box>
     );

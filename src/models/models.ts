@@ -34,7 +34,6 @@ export interface RowProp {
   inputElement: JSX.Element;
 
   editable: boolean;
-  data: IModalData;
 }
 export enum EResponsible {
   Carsten = 1,
