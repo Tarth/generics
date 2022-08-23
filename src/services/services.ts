@@ -16,3 +16,9 @@ export function useFetch(
     fetchData(url).catch(console.error);
   }, []);
 }
+
+export async function GetData(url: string) {
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}

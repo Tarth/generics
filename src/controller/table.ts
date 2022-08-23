@@ -1,10 +1,14 @@
 import { IData } from "../models/models";
-import { useFetch } from "../services/useFetch";
+import { useFetch, GetData as GetDataFromDB } from "../services/services";
 
-export function GetData(
+export function GetDataHook(
   url: string,
   setData: (data: IData) => void,
   setIsLoading: (isLoading: boolean) => void
 ) {
   useFetch(url, setData, setIsLoading);
+}
+
+export function GetData(url: string) {
+  return GetDataFromDB(url);
 }

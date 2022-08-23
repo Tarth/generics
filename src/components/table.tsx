@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -8,24 +8,46 @@ import {
   CircularProgress,
   Button,
 } from "@mui/material";
-import { IData, ITableData, IModalData } from "../models/models";
-import { GetData } from "../controller/table";
+import { EResponsible, ETaskStatus, IModalData, ITableData } from "../models/models";
+import { GetDataHook } from "../controller/table";
 import { format, parseISO } from "date-fns";
 import { EditCustomer } from "./editCustomer";
-import { getRowIdFromRowModel } from "@mui/x-data-grid/hooks/features/rows/gridRowsUtils";
+import { GetData } from "../services/services";
 export function DisplayTable() {
-  const [data, setData] = useState<ITableData[]>([]);
+  const [customers, setCustomers] = useState<ITableData[]>([]);
+  const [customer, setCustomer] = useState<IModalData>({
+    No: 0,
+    Job_Description: "",
+    Job_Task_Description: "",
+    Customer_Name: "",
+    Responsible: "",
+    App_Task_Status_Description: "",
+    JobNo: 0,
+    Job_Task_No: 0,
+    Deadline: "",
+    To_Be_Done_By: "",
+    Task_GUID: "",
+    Customer_No: 0,
+    Created_By: EResponsible.Carsten,
+    Created_DateTime: "",
+    Text: "",
+    Work_Description: "",
+    Task_Status: ETaskStatus.planlagt,
+    Priority: 0,
+  });
   const [isLoading, setIsLoading] = useState(true);
   const [open, setOpen] = useState(true);
   const [selectedValue, setSelectedValue] = useState("");
 
+  {
+  }
   let content;
   let tableData: ITableData[] = [];
   let propertyNames: string[] = [];
 
-  GetData("https://demoeplanner.eliteit.dk/REST/api/Tasks", setData, setIsLoading);
+  GetDataHook("https://demoeplanner.eliteit.dk/REST/api/Tasks", setCustomers, setIsLoading);
 
-  data.forEach((customer) => {
+  customers.forEach((customer) => {
     tableData.push({
       No: customer.No,
       Job_Description: customer.Job_Description,
@@ -37,6 +59,7 @@ export function DisplayTable() {
       Job_Task_No: customer.Job_Task_No,
       Deadline: customer.Deadline,
       To_Be_Done_By: customer.To_Be_Done_By,
+      Task_GUID: customer.Task_GUID,
     });
   });
 
@@ -74,7 +97,14 @@ export function DisplayTable() {
           <TableBody>
             {tableData.map((customer) => {
               return (
-                <TableRow onClick={() => {}}>
+                <TableRow
+                  onClick={async () => {
+                    const data = await GetData(
+                      `https://demoeplanner.eliteit.dk/REST/api/Tasks/${customer.Task_GUID}`
+                    );
+                    setCustomer(data);
+                  }}
+                >
                   <TableCell>{customer.No}</TableCell>
                   <TableCell>{customer.Job_Description}</TableCell>
                   <TableCell>{customer.Job_Task_Description}</TableCell>

@@ -13,12 +13,13 @@ export interface ITableData {
   Job_Task_No: number | string;
   Deadline: string;
   To_Be_Done_By: string;
+  Task_GUID: string;
 }
 
 export interface IModalData extends ITableData {
   Customer_No: number;
   Created_By: EResponsible;
-  Created_DateTime: Date;
+  Created_DateTime: string;
   Text: string;
   Work_Description: string;
   Task_Status: ETaskStatus;
@@ -41,7 +42,7 @@ export enum EResponsible {
   Mikkel = 3,
 }
 
-enum ETaskStatus {
+export enum ETaskStatus {
   planlagt = 1,
   færdig = 2,
   frigivet = 3,
