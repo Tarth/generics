@@ -9,29 +9,58 @@ import {
   Stack,
   Box,
 } from "@mui/material";
+import { RowProp, DialogProps } from "../models/models";
 
-export interface SimpleDialogProps {
-  open: boolean;
-  selectedValue: string;
-  onClose: (value: string) => void;
-}
-
-export const EditCustomer: React.FC<SimpleDialogProps> = ({ open, selectedValue, onClose }) => {
+export const EditCustomer: React.FC<DialogProps> = ({ open, selectedValue, onClose }) => {
   const handleClose = () => {
     onClose(selectedValue);
+  };
+
+  function AllRows() {
+    return (
+      <Box>
+        <Stack>
+          <Row title={"Numre"} inputElement={<TextField></TextField>} editable={false}></Row>
+          <Row title={"Kunde"} inputElement={<TextField></TextField>} editable={false}></Row>
+          <Row title={"Oprettet"} inputElement={<TextField></TextField>} editable={false}></Row>
+          <Row
+            title={"Sagsbeskrivelse"}
+            inputElement={<TextField></TextField>}
+            editable={false}
+          ></Row>
+          <Row title={"Opgavebeskrivelse"} inputElement={<TextField></TextField>}></Row>
+          <Row title={"Arbejdsbeskrivelse"} inputElement={<TextField></TextField>}></Row>
+          <Row title={"Status"} inputElement={<TextField></TextField>}></Row>
+          <Row title={"Prioritet"} inputElement={<TextField></TextField>}></Row>
+          <Row title={"Ansvarlig"} inputElement={<TextField></TextField>}></Row>
+          <Row title={"Udføres af"} inputElement={<TextField></TextField>}></Row>
+          <Row title={"Deadline"} inputElement={<TextField></TextField>}></Row>
+        </Stack>
+      </Box>
+    );
+  }
+
+  const Row: React.FC<RowProp> = ({ title, inputElement, editable = true }): JSX.Element => {
+    let textField = <></>;
+
+    if (editable) {
+      textField = <TextField></TextField>;
+    } else {
+      textField = <TextField variant="filled" disabled></TextField>;
+    }
+    return (
+      <Stack direction="row">
+        <div>{title}</div>
+        {textField}
+      </Stack>
+    );
   };
 
   return (
     <Dialog onClose={handleClose} open={open}>
       <DialogTitle></DialogTitle>
       <DialogContent>
-        <TextField>asd</TextField>
-        <TextField>asd</TextField>
-        <TextField>asd</TextField>
-        <TextField>asd</TextField>
-        <TextField>asd</TextField>
-        <TextField>asd</TextField>
-        <TextField>asd</TextField>
+        <AllRows></AllRows>
       </DialogContent>
       <DialogActions>
         <Button></Button>
