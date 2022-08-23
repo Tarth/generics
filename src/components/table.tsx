@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -8,7 +8,7 @@ import {
   CircularProgress,
   Button,
 } from "@mui/material";
-import { IData, ITableData } from "../models/models";
+import { IData, ITableData, IModalData } from "../models/models";
 import { GetData } from "../controller/table";
 import { format, parseISO } from "date-fns";
 import { EditCustomer } from "./editCustomer";
@@ -20,6 +20,7 @@ export function DisplayTable() {
 
   let content;
   let tableData: ITableData[] = [];
+  let modalData: IModalData[] = [];
   let propertyNames: string[] = [];
 
   GetData("https://demoeplanner.eliteit.dk/REST/api/Tasks", setData, setIsLoading);
@@ -39,7 +40,6 @@ export function DisplayTable() {
     });
   });
 
-  //This is used
   if (tableData.length !== 0) {
     propertyNames = Object.getOwnPropertyNames(tableData[0]);
   }
